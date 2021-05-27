@@ -1,23 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector} from 'react-redux';
-import { StyleSheet, SafeAreaView,FlatList, Text, ScrollView, View} from 'react-native';
+import { StyleSheet, SafeAreaView,FlatList, Text} from 'react-native';
 import Deck from './../../components/deck'
-import { useEffect } from 'react/cjs/react.development';
 
 const Decks = ({navigation}) => {
     const { decks } = useSelector(state => state.decksReducer);
-    console.log("updated decks", decks)
 
-    const [decksList ,setDecksList] = useState(decks)
-
-   
     return (
         <SafeAreaView style={styles.container}>
         <Text style={styles.headline}>Decks List</Text>
-           { decksList.length !== 0 ? (
+           { decks.length !== 0 ? (
             <FlatList
                 style={styles.scrollView}
-                data={decksList}
+                data={decks}
                 extraData={item => item.id.toString()}
                 keyExtractor={item => item.id.toString()}
                 renderItem={({ item }) => (
