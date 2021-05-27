@@ -27,7 +27,6 @@ const decksReducer = (state = initialState, action) => {
 
         case DELETE_DECK:
             if (action.payload) {
-                console.log(...state.decks.filter(item => item.id !== action.payload))
                 return {
                     ...state, decks: state.decks.filter(item => item.id !== action.payload)
                 }
