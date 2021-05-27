@@ -1,0 +1,7 @@
+export const COUNTER_CHANGE = 'COUNTER_CHANGE'
+export const SET_DECKS = 'SET_DECKS'
+export const GET_DECKS = 'GET_DECKS'
+export const GET_DECK_BY_ID = 'GET_DECK_BY_ID'
+export const ADD_NEW_DECK = 'ADD_NEW_DECK'
+export const DELETE_DECK = 'DELETE_DECK'
+export const ADD_NEW_CARD = 'ADD_NEW_CARD'

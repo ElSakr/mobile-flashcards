@@ -1,27 +1,23 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
 import { Text, TextInput, Button } from 'react-native-paper';
-// import { AsyncStorage } from '@react-native-community/async-storage';
+import { addNewDeck } from './../../store/actions/decks'
 
-const NewDeck = () => {
+const NewDeck = ({ navigation }) => {
     const [text, setText] = React.useState('');
-    // const _retrieveData = async () => {
-    //     try {
-    //         const value = await AsyncStorage.getItem('decks');
-    //         if (value !== null) {
-    //             // We have data!!
-    //             console.log(value);
-    //         }
-    //     } catch (error) {
-    //         // Error retrieving data
-    //         console.log('error');
 
-    //     }
-    // };
+    const dispatch = useDispatch();
+    const addNew = () => {
+        dispatch(addNewDeck({
+            id: `deck_${text}`,
+            title: text,
+            count: 0,
+            questions: []
+        }))
+        navigation.navigate('Decks')
+    }
 
-    // useEffect(() => {
-    //     _retrieveData()
-    // }, [])
     return (
         <View style={styles.container}>
             <Text style={styles?.deckTitle}>What is the title of your new deck? </Text>
@@ -32,7 +28,7 @@ const NewDeck = () => {
                 onChangeText={text => setText(text)}
 
             />
-            <Button mode="contained" onPress={() => console.log('Pressed')}>
+            <Button mode="contained" onPress={() => addNew()}>
                 Add New
             </Button>
         </View>
