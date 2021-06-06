@@ -4,8 +4,10 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { getDeckById, deleteDeck } from './../../store/actions/decks'
 import { Button } from 'react-native-paper';
+import * as Notifications from 'expo-notifications';
 
 const DeckDetails = ({ route, navigation }) => {
+
     const { deckId } = route.params;
     const { currentItem } = useSelector(state => state.decksReducer);
     const dispatch = useDispatch();
@@ -14,10 +16,10 @@ const DeckDetails = ({ route, navigation }) => {
         dispatch(getDeckById(deckId))
     }, [deckId]);
 
-
     useEffect(() => {
         dispatch(getDeckById(deckId))
     }, []);
+
 
     return (
         <SafeAreaView style={styles.container}>
@@ -32,7 +34,8 @@ const DeckDetails = ({ route, navigation }) => {
             <View >
                 {
                     currentItem?.count > 0 &&
-                    <Button mode="contained" style={styles.button} onPress={() => {
+                    <Button mode="contained" style={styles.button} onPress={async () => {
+                        await schedulePushNotification();
                         navigation.navigate('Quiz')
                     }}>
                         START QUIZ
@@ -57,6 +60,25 @@ const DeckDetails = ({ route, navigation }) => {
         </SafeAreaView>
     );
 }
+
+function dateNextDay() {
+    var tomorrow = new Date();
+    tomorrow.setDate(new Date().getDate() + 1);
+    tomorrow.setHours(20, 0, 0, 0);
+    return tomorrow.getTime();
+}
+
+async function schedulePushNotification() {
+    await Notifications.scheduleNotificationAsync({
+        content: {
+            title: "Study Reminder 📬",
+            body: 'Here is the notification body',
+            data: { data: 'goes here' },
+        },
+        trigger: { seconds: (dateNextDay() / 1000) },
+    });
+}
+
 
 const styles = StyleSheet.create({
     container: {

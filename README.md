@@ -15,3 +15,7 @@ A React Native app for iOS and Android that allows users to create decks, add ca
 - The front of the card should display the question.
 - The back of the card should display the answer.
 - Users should be able to quiz themselves on a specific deck and receive a score once they're done. 
+
+
+# Tests
+- Platform: Android Device
