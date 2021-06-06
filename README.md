@@ -5,8 +5,12 @@ A React Native app for iOS and Android that allows users to create decks, add ca
 # Instalation
 
 - nmp i 
-- expo start
 
+# Usage
+
+- expo start
+This will open Expo Developer Tools in the browser. 
+Scan the QR Code using the Expo Client app (Expo Client for Android & iOS) from an Android or iOS device.
 
 # Features
 - Use create-react-native-app to build your project.
